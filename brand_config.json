@@ -1,0 +1,24 @@
+{
+  "brand_name": "Iron Leaf",
+  "colors": {
+    "primary": "#A67B5B",
+    "secondary": "#5C4033",
+    "accent": "#2D5A3D",
+    "text_light": "#F5F0E8",
+    "text_dark": "#1A1A1A"
+  },
+  "typography": {
+    "headline_font": "Oswald-Bold",
+    "body_font": "Lato"
+  },
+  "logos": {
+    "primary": "assets/iron-leaf-logo.png"
+  },
+  "layout_rules": {
+    "logo_position": "bottom-right",
+    "logo_max_width_percent": 20,
+    "text_position": "top-center",
+    "safe_margin_percent": 5,
+    "text_background_opacity": 0.8
+  }
+}

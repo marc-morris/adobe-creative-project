@@ -1,0 +1,19 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables (contains API keys)
+.env
+
+# Generated output files
+output/
+
+# OS files
+.DS_Store
+
+# PDF files
+*.pdf
+

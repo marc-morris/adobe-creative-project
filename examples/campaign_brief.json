@@ -1,0 +1,20 @@
+{
+  "campaign_name": "Trail Season 2026",
+  "products": [
+    {
+      "id": "trailblazer-boot",
+      "name": "TrailBlazer Hiking Boot",
+      "description": "Waterproof leather hiking boot with Vibram sole",
+      "product_image": "assets/products/boots.png"
+    },
+    {
+      "id": "trailglide-shoes",
+      "name": "TrailGlide Shoes",
+      "description": "Waterproof hiking shoes with extra cushioning",
+      "product_image": "assets/products/shoes.png"
+    }
+  ],
+  "target_region": "pacific_northwest",
+  "target_audience": "Outdoor enthusiasts aged 25-45",
+  "campaign_message": "Inspired by the wild, built to stand up to it."
+}
