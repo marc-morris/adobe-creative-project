@@ -151,41 +151,26 @@ def add_text_with_background(
     lines = wrap_text(text, font, max_text_width, draw)
 
     # Calculate dimensions for each line and find the widest
-    # Use textbbox to get accurate sizing
     line_heights = []
     line_widths = []
-    line_ascents = []
-    line_descents = []
-
     for line in lines:
         # Get the actual rendered size using textlength for width
         line_width = draw.textlength(line, font=font)
         line_widths.append(int(line_width))
-        # Get bounding box for this specific line
-        bbox = draw.textbbox((0, 0), line, font=font)
+        # For height, use a sample character to get consistent line height
+        bbox = draw.textbbox(
+            (0, 0), "Ag", font=font
+        )  # Use chars with ascender/descender
         line_heights.append(bbox[3] - bbox[1])
-        # Get font metrics for better vertical centering
-        try:
-            ascent, descent = font.getmetrics()
-            line_ascents.append(ascent)
-            line_descents.append(descent)
-        except:
-            # Fallback if getmetrics not available
-            line_ascents.append(bbox[3] - bbox[1])
-            line_descents.append(0)
 
     max_line_width = max(line_widths)
-    max_ascent = (
-        max(line_ascents) if line_ascents else max(line_heights) if line_heights else 50
-    )
-    max_descent = max(line_descents) if line_descents else 0
-    line_height = max_ascent + max_descent
+    line_height = max(line_heights) if line_heights else 50
     line_spacing = int(line_height * 0.2)  # 20% spacing between lines
     total_text_height = (line_height * len(lines)) + (line_spacing * (len(lines) - 1))
 
     # Padding around text - equal top and bottom padding
     padding_x = int(line_height * 0.4)
-    padding_y = int(line_height * 0.3)  # Increased and equal for top/bottom
+    padding_y = int(line_height * 0.3)  # Equal padding for top and bottom
 
     # Calculate total box dimensions
     total_box_width = max_line_width + padding_x * 2
@@ -226,15 +211,14 @@ def add_text_with_background(
     draw = ImageDraw.Draw(result)
     text_rgb = tuple(int(text_color.lstrip("#")[i : i + 2], 16) for i in (0, 2, 4))
 
-    # Calculate starting y position to center text vertically in the pill
-    # Account for the fact that text is drawn from the baseline
-    try:
-        ascent, descent = font.getmetrics()
-        # Start from top padding + ascent (so first line's baseline is at the right position)
-        current_y = y + padding_y + ascent
-    except:
-        # Fallback: use padding_y directly
-        current_y = y + padding_y
+    # Calculate starting y position - center text vertically in the pill
+    # Get the bounding box of the first line to find where to start
+    first_line_bbox = draw.textbbox((0, 0), lines[0], font=font)
+    first_line_height = first_line_bbox[3] - first_line_bbox[1]
+
+    # Start y position: top of box + padding + (line_height - first_line_height) / 2
+    # This centers the first line's bounding box within its allocated space
+    current_y = y + padding_y + (line_height - first_line_height) // 2
 
     for i, line in enumerate(lines):
         # Center each line within the box
