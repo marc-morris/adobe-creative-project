@@ -4,10 +4,6 @@ A proof-of-concept creative automation tool that generates consistent social ad 
 
 Built for the Adobe Forward Deployed AI Engineer take-home exercise.
 
-## Demo Video
-
-[Link to demo video will be added here]
-
 ## Features
 
 - **Campaign Brief Input**: Accept structured campaign briefs with products, target region, audience, and messaging
